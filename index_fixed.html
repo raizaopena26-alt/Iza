@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Student Activity Compilation</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ffe3f1;--dot:#ffc8e3;--panel:#fff8f0;--ink:#4a2c5e;--soft:#8a6b9e;--btn:#6cb8ff;--bz:#efe4fb;--bz2:#cdb9ea;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#241636;--dot:#31204a;--panel:#3a2656;--ink:#ffeefa;--soft:#c9a9e6;--bz:#5a4380;--bz2:#46336a}}
+:root[data-theme="dark"]{--bg:#241636;--dot:#31204a;--panel:#3a2656;--ink:#ffeefa;--soft:#c9a9e6;--bz:#5a4380;--bz2:#46336a}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);background-image:radial-gradient(var(--dot) 2px,transparent 2px);background-size:20px 20px;color:var(--ink);font-family:'VT323',ui-monospace,Menlo,Consolas,monospace;font-size:22px;min-height:100vh;padding:24px 14px 40px}
+h1,h2,h3,.px{font-family:'Press Start 2P',ui-monospace,Menlo,monospace;font-weight:400}
+.bx{box-shadow:0 -4px 0 0 #4a2c5e,0 4px 0 0 #4a2c5e,-4px 0 0 0 #4a2c5e,4px 0 0 0 #4a2c5e}
+/* monitor */
+.pc{max-width:1120px;margin:0 auto}
+.monitor{position:relative;background:var(--bz);padding:20px 20px 0;margin:4px}
+.monitor:after{content:"";position:absolute;inset:0;transform:translate(10px,12px);background:#4a2c5e;opacity:.22;z-index:-1}
+.screen{background:var(--panel);border:4px solid #4a2c5e;box-shadow:inset 0 0 0 4px rgba(255,255,255,.5);overflow:hidden}
+.chin{height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 8px;font-family:'Press Start 2P',monospace;font-size:9px;color:#4a2c5e}
+.led{display:inline-block;width:10px;height:10px;background:#5be08a;box-shadow:0 0 0 3px #4a2c5e;margin-right:12px;animation:bl 2s steps(2) infinite}
+.slots{display:flex;gap:6px}.slots i{width:30px;height:6px;background:#4a2c5e;opacity:.5}
+.neck{width:110px;height:34px;margin:0 auto;background:var(--bz2);border-left:4px solid #4a2c5e;border-right:4px solid #4a2c5e}
+.base{width:300px;max-width:70%;height:22px;margin:0 auto;background:var(--bz);border:4px solid #4a2c5e}
+.desk{display:flex;justify-content:center;align-items:center;gap:22px;margin-top:20px}
+.kb{width:min(420px,70%);height:34px;background:var(--bz);border:4px solid #4a2c5e;background-image:repeating-linear-gradient(90deg,transparent 0 14px,#4a2c5e 14px 16px),repeating-linear-gradient(0deg,transparent 0 10px,#4a2c5e 10px 12px);background-blend-mode:normal}
+.ms{width:26px;height:38px;background:var(--bz);border:4px solid #4a2c5e}
+/* browser bar */
+.chrome{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#ff9ec7;border-bottom:4px solid #4a2c5e;color:#4a2c5e}
+.dots{display:flex;gap:6px}.dots i{width:14px;height:14px;border:3px solid #4a2c5e;background:#fff8f0}
+.url{flex:1;min-width:0;background:#fff8f0;border:3px solid #4a2c5e;padding:1px 10px;font-size:19px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.page{padding:0 20px 8px}
+nav{display:flex;align-items:center;gap:14px;padding:16px 0 20px;flex-wrap:wrap}
+.lg{width:56px;height:56px;display:grid;place-items:center;background:#fff8f0;border:3px solid #4a2c5e;cursor:pointer;padding:0;overflow:hidden}.lg img{width:100%;height:100%;object-fit:contain;display:block}.lg:hover{background:#ffd86b}
+.logo{display:flex;align-items:center;gap:10px;font-family:'Press Start 2P',monospace;font-size:11px;line-height:1.5}
+.logo small{display:block;font-family:'VT323',monospace;font-size:18px;color:var(--soft)}
+.links{margin-left:auto;display:flex;gap:8px;flex-wrap:nowrap}
+.links a{font-family:'Press Start 2P',monospace;font-size:10px;line-height:1;color:#4a2c5e;text-decoration:none;padding:10px 12px;background:#fff8f0;border:3px solid #4a2c5e;box-shadow:3px 3px 0 #4a2c5e;white-space:nowrap;cursor:pointer}
+.links a:hover,.links a.on{background:#ffd86b}
+.links a:active{transform:translate(3px,3px);box-shadow:none}
+/* hero */
+.banner{position:relative;height:360px;overflow:hidden;background:linear-gradient(#ffb6d9 0 20%,#ffc9df 20% 38%,#ffdcd6 38% 56%,#ffeccb 56% 76%,#fff6d6 76%)}
+.banner>svg{position:absolute;display:block}
+.cloud{animation:drift 40s linear infinite}
+@keyframes drift{from{transform:translateX(-120px)}to{transform:translateX(1300px)}}
+.sun{right:5%;top:22px;animation:bob 3s steps(2) infinite}
+@keyframes bob{50%{transform:translateY(6px)}}
+.sp{animation:tw 1.6s steps(2) infinite}
+@keyframes tw{50%{opacity:.15;transform:scale(.6)}}
+.fh{bottom:70px;animation:fl 7s linear infinite;opacity:0}
+@keyframes fl{0%{transform:translateY(0);opacity:0}15%{opacity:.9}100%{transform:translateY(-240px);opacity:0}}
+.hill{position:absolute;left:0;right:0;bottom:0}
+.h0{height:150px;background:#b9a6e8;clip-path:polygon(0 70%,6% 70%,6% 50%,14% 50%,14% 30%,24% 30%,24% 12%,34% 12%,34% 32%,44% 32%,44% 52%,56% 52%,56% 34%,66% 34%,66% 16%,78% 16%,78% 36%,88% 36%,88% 56%,100% 56%,100% 100%,0 100%)}
+.h1{height:90px;background:#9fe3b1;clip-path:polygon(0 55%,8% 55%,8% 35%,20% 35%,20% 18%,34% 18%,34% 35%,46% 35%,46% 55%,60% 55%,60% 38%,72% 38%,72% 20%,86% 20%,86% 40%,100% 40%,100% 100%,0 100%)}
+.h2{height:56px;background:#6fcf8f;clip-path:polygon(0 40%,14% 40%,14% 20%,30% 20%,30% 45%,52% 45%,52% 25%,68% 25%,68% 50%,88% 50%,88% 30%,100% 30%,100% 100%,0 100%)}
+.hero{position:absolute;inset:0;display:grid;place-items:center;padding:14px}
+.hw{width:min(560px,100%);background:#fff8f0;color:#4a2c5e;text-align:center;box-shadow:0 -4px #4a2c5e,0 4px #4a2c5e,-4px 0 #4a2c5e,4px 0 #4a2c5e,8px 12px 0 0 rgba(74,44,94,.3)}
+.hw .tb{background:#9fd8ff;border-bottom:4px solid #4a2c5e;padding:7px 10px;font-family:'Press Start 2P',monospace;font-size:9px;text-align:left}
+.hw .in{padding:20px 16px 22px;display:grid;gap:14px;justify-items:center}
+h1{margin:0;font-size:clamp(18px,4.2vw,34px);line-height:1.45;color:#4a2c5e;text-shadow:3px 3px 0 #ff9ec7}
+.tag{font-size:clamp(19px,2.8vw,25px);color:#6b4a84}
+.go{font-family:'Press Start 2P',monospace;font-size:11px;color:#fff;background:var(--btn);border:0;padding:13px 18px;cursor:pointer;text-decoration:none;box-shadow:0 -4px #4a2c5e,0 4px #4a2c5e,-4px 0 #4a2c5e,4px 0 #4a2c5e,0 8px 0 4px #3f86c9}
+.go:hover,.view:hover:not(:disabled){transform:translateY(4px)}
+/* featured */
+.ft{text-align:center;margin:40px 0 26px;font-size:clamp(13px,2.4vw,19px);line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;padding:0 4px;align-items:stretch}
+@media (max-width:760px){.grid{grid-template-columns:1fr;gap:30px}}
+.card{background:var(--panel);margin:4px;display:flex;flex-direction:column;transition:transform .12s steps(2)}
+.card:hover{transform:translateY(-6px)}
+.thumb{position:relative;height:150px;display:grid;place-items:center;border-bottom:4px solid #4a2c5e;background-color:var(--acc);background-image:linear-gradient(45deg,rgba(255,255,255,.28) 25%,transparent 25% 75%,rgba(255,255,255,.28) 75%),linear-gradient(45deg,rgba(255,255,255,.28) 25%,transparent 25% 75%,rgba(255,255,255,.28) 75%);background-size:32px 32px;background-position:0 0,16px 16px;overflow:hidden}
+.thumb .gr{position:absolute;left:0;right:0;bottom:0;height:24px;background:#6fcf8f;border-top:4px solid #4a2c5e}
+.thumb .hop{animation:hop 1.2s steps(3) infinite;margin-bottom:12px}
+@keyframes hop{50%{transform:translateY(-9px)}}
+.thumb svg.d{position:absolute}
+.badge{position:absolute;top:10px;right:10px;font-family:'Press Start 2P',monospace;font-size:10px;padding:6px 8px;background:#4a2c5e;color:#fff8f0}
+.cb{padding:14px 14px 18px;display:flex;flex-direction:column;gap:12px;flex:1}
+.ti{min-height:62px}
+ul:empty{display:none}
+.tools{position:absolute;top:10px;left:10px;display:flex;gap:6px;z-index:2}
+.tool{position:relative;font-family:'Press Start 2P',monospace;font-size:8px;line-height:1;color:#4a2c5e;background:#fff8f0;border:3px solid #4a2c5e;box-shadow:3px 3px 0 #4a2c5e;padding:7px 8px;cursor:pointer}
+.tool:hover,.tool:focus-within{background:#ffd86b}
+.lrow{display:flex;gap:6px;align-items:stretch}.lrow[hidden]{display:none}
+.lrow input{flex:1;min-width:0;font:20px 'VT323',monospace;border:3px solid var(--ink);padding:2px 6px;background:var(--panel);color:var(--ink)}
+.btns{margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:14px;padding-top:6px}
+.up{position:relative;font-family:'Press Start 2P',monospace;font-size:8px;line-height:1;color:#4a2c5e;background:var(--acc);border:3px solid #4a2c5e;box-shadow:3px 3px 0 #4a2c5e;padding:9px 10px;cursor:pointer;width:78%;text-align:center}
+.up:hover,.up:focus-within{background:#ffd86b}
+.up:active{transform:translate(3px,3px);box-shadow:none}
+.vh{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer}
+.thumb.over:after{content:'DROP HERE';position:absolute;inset:0;display:grid;place-items:center;background:rgba(255,248,240,.85);font-family:'Press Start 2P',monospace;font-size:11px;color:#4a2c5e}
+.cb h3{margin:0;font-size:12px;line-height:1.5}
+.cb small{display:block;font-size:20px;line-height:1.2;margin-top:4px;color:var(--soft)}
+.drop{display:block;cursor:pointer;text-align:center;padding:14px 10px;border:4px dashed var(--ink);background:repeating-linear-gradient(45deg,transparent 0 8px,rgba(255,255,255,.35) 8px 16px);position:relative}
+.drop input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer}
+.drop:hover,.drop.over,.drop:focus-within{background-color:var(--acc);border-style:solid;color:#4a2c5e}
+.drop .px{font-size:10px;display:block;margin-bottom:6px;line-height:1.6}
+.drop span{font-size:20px}
+ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;max-height:200px;overflow-y:auto}
+li{border:3px solid var(--ink);padding:6px 8px;background:var(--panel);animation:pop .25s steps(3)}
+@keyframes pop{from{transform:scale(.8);opacity:0}}
+.row{display:flex;align-items:center;gap:8px}
+.nm{flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-size:21px}
+.sz{color:var(--soft);font-size:19px}
+.x,.op{font-family:'Press Start 2P',monospace;font-size:9px;border:3px solid #4a2c5e;background:var(--acc);color:#4a2c5e;padding:5px 6px;cursor:pointer;text-decoration:none;line-height:1}
+.x{background:#ffd0d6}
+.pg{height:12px;border:3px solid var(--ink);margin-top:6px;background:var(--panel)}
+.pg i{display:block;height:100%;width:0;background:repeating-linear-gradient(90deg,var(--acc) 0 6px,#4a2c5e 6px 8px)}
+.empty{text-align:center;color:var(--soft);font-size:20px;padding:2px;border:0;animation:none}
+.view{width:78%;margin:4px 0 0;font-family:'Press Start 2P',monospace;font-size:9px;color:#fff;background:var(--btn);border:0;padding:13px;cursor:pointer;box-shadow:0 -4px #4a2c5e,0 4px #4a2c5e,-4px 0 #4a2c5e,4px 0 #4a2c5e,0 8px 0 4px #3f86c9}
+.view:disabled{background:#b8aac6;box-shadow:0 -4px #4a2c5e,0 4px #4a2c5e,-4px 0 #4a2c5e,4px 0 #4a2c5e;cursor:not-allowed}
+#about{margin:52px 4px 24px;background:var(--panel);padding:18px 20px;text-align:center}
+#about h2{margin:0 0 8px;font-size:14px}
+#about p{margin:0;font-size:22px;color:var(--soft)}
+.chip{display:inline-block;margin-top:14px;font-family:'Press Start 2P',monospace;font-size:11px;line-height:1.5;color:#4a2c5e;background:#ffd86b;border:3px solid #4a2c5e;box-shadow:4px 4px 0 #4a2c5e;padding:10px 14px}
+/* taskbar */
+.task{display:flex;align-items:center;gap:12px;padding:6px 10px;background:#ffd86b;border-top:4px solid #4a2c5e;color:#4a2c5e;font-size:20px}
+.start{font-family:'Press Start 2P',monospace;font-size:9px;background:#ff9ec7;border:3px solid #4a2c5e;padding:6px 8px}
+.nmtag{white-space:nowrap;font-weight:400}
+.task .sp3{flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.blink{animation:bl 1s steps(2) infinite}@keyframes bl{50%{opacity:.2}}
+@media (max-width:620px){nav{gap:12px}.links{width:100%;margin-left:0;justify-content:space-between}.links a{flex:1;text-align:center;padding:10px 4px;font-size:9px}}
+@media (max-width:560px){.monitor{padding:12px 12px 0}.page{padding:0 12px 8px}.links a{padding:7px 6px;font-size:8px}.slots{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="pc">
+ <div class="monitor bx">
+  <div class="screen">
+   <div class="chrome"><div class="dots"><i></i><i></i><i></i></div><div class="url px" style="font-family:'VT323',monospace">www.student-activity-compilation.com</div></div>
+   <div class="page" id="home">
+    <nav>
+     <div class="logo"><button class="lg" id="lg" title="Click to upload the school logo" aria-label="Upload school logo"><span id="shield"></span></button><input type="file" id="lgf" accept="image/*" hidden><div>MAP&Uacute;A MALAYAN<small>Colleges Laguna</small></div></div>
+     <div class="links"><a href="#home" class="on">Home</a><a href="#activities">Activities</a><a href="#about">About</a></div>
+    </nav>
+
+    <section class="banner bx" id="banner" aria-label="Welcome banner">
+     <div class="hill h0"></div><div class="hill h1"></div><div class="hill h2"></div>
+     <div class="hero"><div class="hw"><div class="tb">student_activity.exe</div><div class="in">
+       <h1>Student Activity Compilation</h1>
+       <div class="tag">HTML | CSS | Creativity | Future Ready <span class="blink">&hearts;</span></div>
+       <a class="go" href="#activities">Explore Activities</a>
+     </div></div></div>
+    </section>
+
+    <h2 class="ft" id="activities">&#9733; Featured Activities &#9733;</h2>
+    <div class="grid" id="grid"></div>
+
+    <section id="about" class="bx">
+     <h2>About</h2>
+     <p>A little corner of my journey as a BS Marketing student at Mapúa Malayan Colleges Laguna, where I learn, experiment, and build through Fundamentals of Coding.</p>
+     <span class="chip">&#9733; BS Marketing Student &#9733;</span>
+    </section>
+   </div>
+   <div class="task"><span class="start">&#9829; START</span><span class="sp3">total files: <b id="total">0</b> &bull; files stay in this tab only</span><span class="nmtag">Opeña, Raiza</span></div>
+  </div>
+  <div class="chin"><span><i class="led"></i>PIXEL-PC</span><span class="slots"><i></i><i></i><i></i></span></div>
+ </div>
+ <div class="neck"></div><div class="base"></div>
+ <div class="desk"><div class="kb"></div><div class="ms"></div></div>
+</div>
+
+<script>
+const PAL={r:'#ff7eb6',w:'#fff8f0',b:'#7ec8ff',d:'#5b3a6b',y:'#ffd86b',o:'#e8a33d',c:'#ffffff',g:'#6fcf8f',n:'#4a2c5e',R:'#d6203a'};
+function sprite(m,s,cls){const w=Math.max(...m.map(r=>r.length));let q='';
+ m.forEach((row,y)=>[...row].forEach((c,x)=>{if(PAL[c])q+=`<rect x="${x}" y="${y}" width="1" height="1" fill="${PAL[c]}"/>`}));
+ return `<svg ${cls?`class="${cls}"`:''} viewBox="0 0 ${w} ${m.length}" width="${w*s}" height="${m.length*s}" shape-rendering="crispEdges" aria-hidden="true">${q}</svg>`}
+const SHOP=[".rwrwrwrwrw.","rwrwrwrwrwrw","rrrrrrrrrrrr",".wwwwwwwwww.",".wbbw..wbbw.",".wbbw..wbbw.",".wwww..wwww.",".ww..dd..ww.",".ww..dd..ww.",".dddddddddd."];
+const FOLD=[".oooo.......","oyyyyoooooo.","oyyyyyyyyyyo","oyyyywwyyyyo","oyyywwwwyyyo","oyyyywwyyyyo","oyyywyywyyyo","oyyyyyyyyyyo",".oooooooooo."];
+const EXAM=["..dddddddd..",".dwwwwwwwwd.",".dwwrrrwwwd.",".dwrwwwrwwd.",".dwrrrrrwwd.",".dwrwwwrwwd.",".dwwwwwwwwd.",".dwbbbbbbwd.",".dwbbbbwwwd.",".dwwwwwwwwd.","..dddddddd.."];
+const CLOUD=["....cccc........","..cccccccc.ccc..",".cccccccccccccc.","cccccccccccccccc",".cccccccccccccc."];
+const SUN=["..yyyy..",".yyyyyy.","yyyyyyyy","yydyydyy","yrryyrry","yyyddyyy",".yyyyyy.","..yyyy.."];
+const HEART=[".rr.rr.","rrrrrrr","rrrrrrr",".rrrrr.","..rrr..","...r..."];
+const STAR=["..y..","..y..","yyyyy","..y..","..y.."];
+const SHIELD=["nnnnnnnn","nRRRRRRn","nRyyyyRn","nRyRRyRn","nRyyyyRn","nRRRRRRn",".nRRRRn.","..nRRn..","...nn..."];
+document.getElementById('shield').innerHTML=sprite(SHIELD,5);
+/* LOGO: click the logo box to upload your school logo (remembered in this browser). */
+const lg=document.getElementById('lg'),lgf=document.getElementById('lgf');
+const showLogo=u=>{lg.innerHTML='<img alt="Mapúa Malayan Colleges Laguna logo" src="'+u+'">'};
+try{const u=localStorage.getItem('mmcl-logo');if(u)showLogo(u)}catch(e){}
+lg.onclick=()=>lgf.click();
+lgf.onchange=()=>{const f=lgf.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{showLogo(r.result);try{localStorage.setItem('mmcl-logo',r.result)}catch(e){}};r.readAsDataURL(f)};
+
+const ban=document.getElementById('banner');
+const add=(h,css,cls)=>{const d=document.createElement('div');d.innerHTML=h;const s=d.firstChild;s.setAttribute('class',cls||'');s.style.cssText=css;ban.prepend(s)};
+add(sprite(SUN,9),'','sun');
+[[8,30,5,0],[28,100,4,12],[60,52,6,24],[78,170,4,6]].forEach(([l,t,s,dl])=>add(sprite(CLOUD,s),`left:${l}%;top:${t}px;animation-delay:-${dl}s;animation-duration:${36+dl}s;margin-left:-120px`,'cloud'));
+for(let i=0;i<14;i++)add(sprite(STAR,i%3?3:4),`left:${(i*7.3+4)%96}%;top:${(i*37)%200+8}px;animation-delay:-${(i*.37).toFixed(2)}s`,'sp');
+for(let i=0;i<7;i++)add(sprite(HEART,i%2?4:3),`left:${10+i*13}%;animation-delay:-${i*1.1}s;animation-duration:${6+i%3}s`,'fh');
+
+const CARDS=[
+ {id:'market',name:'Marketplace',sub:'A simple HTML website for Saved A Seat Coffee Shop, designed to showcase the shop, its menu, and what it offers.',icon:SHOP,acc:'#ffb3d6'},
+ {id:'folio',name:'E-Portfolio',sub:'A personal e-portfolio showcasing my skills, experiences, achievements, and contact.',icon:FOLD,acc:'#ffe48a'},
+ {id:'exam',name:'Final Exam',sub:'Upload your exam files',icon:EXAM,acc:'#a9dcff'}
+];
+/* PROJECT LINKS: paste your project URLs between the quotes, or use the LINK button on each card. */
+const LINKS={
+  market:'SavedASeatCoffee/index.html',
+  folio:'opena_raiza_portfolio/index.html',
+  exam:''
+};
+let links={...LINKS};
+function refreshBtn(id){const b=document.getElementById('v-'+id);if(b)b.disabled=!(links[id]||store[id].length)}
+const store={};const grid=document.getElementById('grid');
+const fmt=n=>n<1024?n+' B':n<1048576?(n/1024).toFixed(1)+' KB':(n/1048576).toFixed(1)+' MB';
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+CARDS.forEach(c=>{store[c.id]=[];
+ const el=document.createElement('article');el.className='card bx';el.style.setProperty('--acc',c.acc);
+ el.innerHTML=`<div class="thumb" title="Drag files here"><div class="tools"><label class="tool">+ FILE<input class="vh" type="file" multiple aria-label="Upload files to ${c.name}"></label><button class="tool lk" type="button">LINK</button></div><span class="badge" id="n-${c.id}">0</span>
+  ${sprite(STAR,3,'d').replace('class="d"','class="d" style="left:48%;top:16%"')}${sprite(HEART,4,'d').replace('class="d"','class="d" style="right:16%;bottom:46px"')}
+  <span class="hop">${sprite(c.icon,8)}</span><div class="gr"></div></div>
+  <div class="cb"><div class="ti"><h3>${c.name}</h3><small>${c.sub}</small></div>
+  <div class="lrow" hidden><input type="url" placeholder="paste project link here" aria-label="Project link for ${c.name}"><button class="tool sv" type="button">SAVE</button></div>
+  <ul id="l-${c.id}"></ul>
+  <div class="btns"><button class="view" id="v-${c.id}" disabled>View Project</button></div></div>`;
+ grid.appendChild(el);
+ const drop=el.querySelector('.thumb'),inp=el.querySelector('input');
+ inp.onchange=()=>{take(c.id,inp.files);inp.value=''};
+ ['dragenter','dragover'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.add('over')}));
+ ['dragleave','drop'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.remove('over')}));
+ drop.addEventListener('drop',ev=>take(c.id,ev.dataTransfer.files));
+ const row=el.querySelector('.lrow'),li=row.querySelector('input');
+ el.querySelector('.lk').onclick=()=>{row.hidden=!row.hidden;li.value=links[c.id]||'';if(!row.hidden)li.focus()};
+ el.querySelector('.sv').onclick=()=>{let v=li.value.trim();if(v&&!/^https?:\/\//i.test(v))v='https://'+v;links[c.id]=v;try{localStorage.setItem('mmcl-links',JSON.stringify(links))}catch(e){}row.hidden=true;refreshBtn(c.id)};
+ el.querySelector('.view').onclick=()=>{const u=links[c.id]||(store[c.id][0]||{}).url;if(u)window.open(u,'_blank','noopener')};
+ render(c.id);
+});
+
+function take(id,files){[...files].forEach(f=>{
+ const item={name:f.name,size:f.size,url:URL.createObjectURL(f),p:0,key:Math.random()};
+ store[id].push(item);
+ const t=setInterval(()=>{item.p=Math.min(100,item.p+10+Math.random()*25);const b=document.querySelector(`[data-k="${item.key}"] i`);if(b)b.style.width=item.p+'%';if(item.p>=100)clearInterval(t)},90);
+});render(id)}
+
+function render(id){const ul=document.getElementById('l-'+id);
+ ul.innerHTML=store[id].length?store[id].map(f=>`<li data-k="${f.key}"><div class="row"><span class="nm" title="${esc(f.name)}">${esc(f.name)}</span><span class="sz">${fmt(f.size)}</span><a class="op" href="${f.url}" target="_blank" rel="noopener" aria-label="Open file">OPEN</a><button class="x" data-r="${f.key}" aria-label="Remove file">X</button></div><div class="pg"><i style="width:${f.p}%"></i></div></li>`).join(''):'';
+ ul.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{const k=+b.dataset.r;const i=store[id].findIndex(f=>f.key===k);URL.revokeObjectURL(store[id][i].url);store[id].splice(i,1);render(id)});
+ document.getElementById('n-'+id).textContent=store[id].length;
+ refreshBtn(id);
+ document.getElementById('total').textContent=Object.values(store).reduce((a,l)=>a+l.length,0);
+}
+const navs=[...document.querySelectorAll('.links a')];
+navs.forEach(a=>a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));
+ if(a.getAttribute('href')==='#home')window.scrollTo({top:0,behavior:'smooth'});else if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+ navs.forEach(n=>n.classList.toggle('on',n===a))}));
+</script>
+</body>
+</html>
